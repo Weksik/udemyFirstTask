@@ -91,11 +91,16 @@ const appData = {
     appData.income = items.split(", ");
     appData.income.push(prompt("Может что-то еще?"));
     appData.income.sort();
-    console.log(`Способы доп. заработка: `);
-    appData.income.forEach(function(el) {
-      let somestring;
-      somestring += el;
-      console.log(somestring);
+    let additionalIncome = "";
+    appData.income.forEach(function(el, i) {
+      additionalIncome += `${i + 1}) ${el} `;
     });
+    alert(`Способы доп. заработка: ${additionalIncome}`);
   }
 };
+let res = "";
+for (let key in appData) {
+  // res += `${key}: ${appData[key]}, `; с перечеслением всех свойств
+  res += `${key}, `;
+}
+console.log(`Наша программа включает в себя данные: ${res}`);
