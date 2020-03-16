@@ -2,14 +2,8 @@
 let money;
 let time;
 
-function start() {
-  money = +prompt("Ваш бюджет на месяц?");
-  time = prompt("Введите дату в формате YYYY-MM-DD");
+start();
 
-  while (isNaN(money) || money == "" || money == null) {
-    money = +prompt("Ваш бюджет на месяц?");
-  }
-}
 const appData = {
   budjet: money,
   timeData: time,
@@ -18,6 +12,16 @@ const appData = {
   income: [],
   savings: true
 };
+
+function start() {
+  money = +prompt("Ваш бюджет на месяц?");
+  time = prompt("Введите дату в формате YYYY-MM-DD");
+
+  while (isNaN(money) || money == "" || money == null) {
+    money = +prompt("Ваш бюджет на месяц?");
+  }
+}
+
 function chooseExpenses() {
   for (let i = 0; i < 2; i++) {
     let question = prompt(
@@ -103,7 +107,7 @@ function chooseExpenses() {
 
 // appData.moneyPerDay = Math.round(appData.budjet / 30);
 function detectDayBudget() {
-  appData.moneyPerDay = (appData.budjet / 30).toFixed();
+  appData.moneyPerDay = +(appData.budjet / 30).toFixed();
   alert("Ежедневный бюджет " + appData.moneyPerDay);
 }
 //Требуется использовать <= вместо < т.к. если бюджет 3000, то moneyPerDay == 100, и происходит ошибка.
@@ -126,9 +130,14 @@ function checkSavings() {
     alert("Доход в месяц с вашего депозита: " + appData.monthIncome);
   }
 }
-start();
-console.log(money);
+function chooseOptExpenses() {
+  for (let i = 0; i < 3; i++) {
+    let key = i + 1;
+    appData.optionalExpenses[key] = prompt("Статья необязательных расходов?");
+  }
+}
 chooseExpenses();
 detectDayBudget();
 checkSavings();
+chooseOptExpenses();
 console.log(appData);
